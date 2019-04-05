@@ -1,3 +1,8 @@
+#
+# Sam Ghalayini
+# Python HW 25 GUI 1
+#
+
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt #importing files
 #print current date
 now = QDate.currentDate()
@@ -40,7 +45,7 @@ if now.isDaylightTime():
 else:
     print("The current date does not fall into DST time")
 
-#%% GUI
+### GUI
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
 
@@ -51,7 +56,7 @@ w.move(300,300)
 w.setWindowTitle('Simple First')
 w.show()
 sys.exit(app.exec_())
-# icon in window
+### icon in window
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtGui import QIcon
@@ -61,14 +66,14 @@ class Example(QWidget):
         self.initUI()
     def initUI(self):
         self.setGeometry(300,300,300,220)
-        self.setWindowTitle('Icon')
-        self.setWindowIcon(QIcon('web.png'))
-        
+        self.setWindowTitle('Icon') 
+        self.setWindowIcon(QIcon('index.png')) #file name is indexx, from google images
         self.show()
+        
 app = QApplication(sys.argv)
 ex = Example()
 sys.exit(app.exec_())
-#%% push button
+### push button
 import sys
 from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
 from PyQt5.QtGui import QFont
@@ -91,7 +96,7 @@ class Example(QWidget):
 app = QApplication(sys.argv)
 ex = Example()
 sys.exit(app.exec())
-#%% Closing a window
+### Closing a window
 import sys
 from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication)
 
@@ -110,10 +115,46 @@ class Example(QWidget):
 app = QApplication(sys.argv)
 ex = Example()
 sys.exit(app.exec_())        
-#%% message box
+### message box
 import sys
 from PyQt5.QtWidgets import (QWidget, QMessageBox, QApplication)
-
+class Example(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+    def initUI(self):
+        self.setGeometry(300,300,450,150)
+        self.setWindowTitle('Message Box')
+        self.show()
+    def closeEvent(self,event):
+        reply = QMessageBox.question(self,'Message',"Do you want to quit?",QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+app = QApplication(sys.argv)
+ex = Example()
+sys.exit(app.exec_())
+### Centering Window
+import sys
+from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
+class Example(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+    def initUI(self):
+        self.resize(450,150)
+        self.center()
+        self.setWindowTitle('Center')
+        self.show()
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+app=QApplication(sys.argv)
+ex = Example()
+sys.exit(app.exec_())
         
         
         
